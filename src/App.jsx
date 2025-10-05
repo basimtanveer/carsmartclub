@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import cscLogo from './assets/csc.jpg'
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -32,9 +33,11 @@ function App() {
           <div className="flex justify-between items-center h-14 sm:h-16">
             <div className="flex items-center space-x-4 sm:space-x-8">
               <div className="flex items-center">
-                <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center mr-2 sm:mr-3">
-                  <span className="text-white font-bold text-xs sm:text-sm">CS</span>
-                </div>
+                <img 
+                  src={cscLogo} 
+                  alt="Car Smart Club Logo" 
+                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover mr-2 sm:mr-3"
+                />
                 <h1 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
                   Car Smart Club
                 </h1>
@@ -484,9 +487,11 @@ function App() {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center mb-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center mr-3">
-                  <span className="text-white font-bold text-sm">CS</span>
-                </div>
+                <img 
+                  src={cscLogo} 
+                  alt="Car Smart Club Logo" 
+                  className="w-8 h-8 rounded-lg object-cover mr-3"
+                />
                 <h3 className="text-xl font-bold">Car Smart Club</h3>
               </div>
               <p className="text-gray-400">Your prescription for better car care.</p>
