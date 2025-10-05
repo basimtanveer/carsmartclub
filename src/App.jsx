@@ -27,7 +27,7 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white">
       {/* Header / Navigation */}
       <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-slate-900/95 backdrop-blur-md shadow-xl' : 'bg-transparent'
+        isScrolled ? 'bg-white backdrop-blur-md shadow-xl' : 'bg-white backdrop-blur-sm'
       }`}>
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-14 sm:h-16">
@@ -36,19 +36,16 @@ function App() {
                 <img 
                   src={cscLogo} 
                   alt="Car Smart Club Logo" 
-                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover mr-2 sm:mr-3"
+                  className="h-8 sm:h-10 w-auto object-contain"
                 />
-                <h1 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
-                  Car Smart Club
-                </h1>
               </div>
               <div className="hidden lg:flex space-x-8">
                 {['home', 'how-it-works', 'providers', 'garage', 'diagnostics', 'evaluations', 'offers', 'blog'].map((item) => (
                   <button
                     key={item}
                     onClick={() => scrollToSection(item)}
-                    className={`capitalize transition-colors duration-200 hover:text-cyan-400 ${
-                      activeSection === item ? 'text-cyan-400' : 'text-gray-300'
+                    className={`capitalize transition-colors duration-200 hover:text-blue-600 ${
+                      activeSection === item ? 'text-blue-600' : 'text-gray-700'
                     }`}
                   >
                     {item.replace('-', ' ')}
@@ -57,8 +54,8 @@ function App() {
               </div>
             </div>
             <div className="flex items-center space-x-2 sm:space-x-4">
-              <button className="text-gray-300 hover:text-white transition-colors text-sm sm:text-base hidden sm:block">Sign In</button>
-              <button className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 px-3 sm:px-6 py-1.5 sm:py-2 rounded-full font-semibold text-xs sm:text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+              <button className="text-gray-700 hover:text-blue-600 transition-colors text-sm sm:text-base hidden sm:block">Sign In</button>
+              <button className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 px-3 sm:px-6 py-1.5 sm:py-2 rounded-full font-semibold text-xs sm:text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-white">
                 Join
               </button>
             </div>
@@ -240,7 +237,7 @@ function App() {
                     <p className="text-green-400 font-bold text-2xl">{deal.discount}</p>
                   </div>
                 </div>
-                <button className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 py-3 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg">
+                <button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-3 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg">
                   Claim Deal
                 </button>
               </div>
@@ -249,7 +246,7 @@ function App() {
           <div className="text-center mt-12">
             <div className="flex justify-center space-x-6 mb-8">
               {['Maintenance', 'Tires', 'Detailing', 'Diagnostics'].map((filter) => (
-                <button key={filter} className="bg-slate-700/60 hover:bg-cyan-500/20 border border-slate-600 hover:border-cyan-500 px-6 py-3 rounded-xl text-lg font-semibold transition-all duration-300 shadow-lg">
+                <button key={filter} className="bg-slate-700/60 hover:bg-blue-500/20 border border-slate-600 hover:border-blue-500 px-6 py-3 rounded-xl text-lg font-semibold transition-all duration-300 shadow-lg">
                   {filter}
                 </button>
               ))}
@@ -490,9 +487,8 @@ function App() {
                 <img 
                   src={cscLogo} 
                   alt="Car Smart Club Logo" 
-                  className="w-8 h-8 rounded-lg object-cover mr-3"
+                  className="w-full h-auto object-contain"
                 />
-                <h3 className="text-xl font-bold">Car Smart Club</h3>
               </div>
               <p className="text-gray-400">Your prescription for better car care.</p>
             </div>
