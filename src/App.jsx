@@ -6,6 +6,36 @@ function App() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
   const [showSmartie, setShowSmartie] = useState(false)
+  const [isMember, setIsMember] = useState(false) // Member status for personalized experience
+
+  // Helper function to open Car Smart People with contextual filters and analytics
+  const openCarSmartPeople = (filters = {}) => {
+    const baseUrl = 'https://www.carsmartpeople.com'
+    
+    // Add member context to filters
+    const enhancedFilters = {
+      ...filters,
+      member: isMember ? 'true' : 'false',
+      club: 'car_smart_club'
+    }
+    
+    const queryParams = new URLSearchParams(enhancedFilters).toString()
+    const url = queryParams ? `${baseUrl}?${queryParams}` : baseUrl
+    
+    // Analytics tracking
+    console.log('CSC to CSP click:', {
+      timestamp: new Date().toISOString(),
+      filters: enhancedFilters,
+      source: 'car_smart_club',
+      member: isMember,
+      url: url
+    })
+    
+    // In a real implementation, you would send this to your analytics service
+    // Example: analytics.track('csc_to_csp_click', { filters: enhancedFilters, source: 'car_smart_club', member: isMember })
+    
+    window.open(url, '_blank')
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +73,13 @@ function App() {
                 {['home', 'how-it-works', 'providers', 'garage', 'diagnostics', 'evaluations', 'offers', 'blog'].map((item) => (
                   <button
                     key={item}
-                    onClick={() => scrollToSection(item)}
+                    onClick={() => {
+                      if (item === 'providers') {
+                        window.open('https://www.carsmartpeople.com', '_blank');
+                      } else {
+                        scrollToSection(item);
+                      }
+                    }}
                     className={`capitalize transition-colors duration-200 hover:text-blue-600 ${
                       activeSection === item ? 'text-blue-600' : 'text-gray-700'
                     }`}
@@ -54,9 +90,23 @@ function App() {
               </div>
             </div>
             <div className="flex items-center space-x-2 sm:space-x-4">
-              <button className="text-gray-700 hover:text-blue-600 transition-colors text-sm sm:text-base hidden sm:block">Sign In</button>
-              <button className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 px-3 sm:px-6 py-1.5 sm:py-2 rounded-full font-semibold text-xs sm:text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg text-white">
-                Join
+              <button 
+                onClick={() => setIsMember(!isMember)}
+                className={`text-sm sm:text-base transition-colors hidden sm:block ${
+                  isMember ? 'text-orange-600 hover:text-orange-700' : 'text-gray-700 hover:text-blue-600'
+                }`}
+              >
+                {isMember ? 'Member' : 'Sign In'}
+              </button>
+              <button 
+                onClick={() => setIsMember(!isMember)}
+                className={`px-3 sm:px-6 py-1.5 sm:py-2 rounded-full font-semibold text-xs sm:text-base transition-all duration-300 transform hover:scale-105 hover:shadow-lg ${
+                  isMember 
+                    ? 'bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white' 
+                    : 'bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white'
+                }`}
+              >
+                {isMember ? 'Member ✓' : 'Join'}
               </button>
             </div>
           </div>
@@ -78,10 +128,16 @@ function App() {
                 Manage & Assess your car(s), run diagnostics, and find trusted providers — all in one place.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-4 justify-center lg:justify-start">
-                <button className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 px-6 sm:px-8 py-3 rounded-full font-semibold text-base sm:text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
-                  Add Your Car & Start Diagnosis
+                <button className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 px-4 sm:px-6 py-2.5 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                  Start Car Diagnosis
                 </button>
-                <button className="border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-slate-900 px-6 sm:px-8 py-3 rounded-full font-semibold text-base sm:text-lg transition-all duration-300 transform hover:scale-105">
+                <button 
+                  onClick={() => openCarSmartPeople({ service: 'general', location: 'nearby' })}
+                  className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white px-4 sm:px-6 py-2.5 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 transform hover:scale-105"
+                >
+                  Find Local Providers
+                </button>
+                <button className="border-2 border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-slate-900 px-4 sm:px-6 py-2.5 rounded-full font-semibold text-sm sm:text-base transition-all duration-300 transform hover:scale-105">
                   Explore Local Deals
                 </button>
               </div>
@@ -120,6 +176,51 @@ function App() {
         </div>
       </section>
 
+      {/* How It Works Section */}
+      <section id="how-it-works" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-slate-800/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12 sm:mb-20">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">How It Works</h2>
+            <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">
+              We partner with <span className="text-cyan-400 font-semibold">Car Smart People</span> — see trusted providers in your area
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <div className="text-center p-8 bg-slate-800/40 backdrop-blur-xl rounded-2xl border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 shadow-xl">
+              <div className="text-5xl mb-6">🔍</div>
+              <h3 className="text-2xl font-bold mb-4">1. Diagnose Your Car</h3>
+              <p className="text-gray-400 text-lg">Run diagnostics to identify any issues with your vehicle</p>
+            </div>
+            <div className="text-center p-8 bg-slate-800/40 backdrop-blur-xl rounded-2xl border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 shadow-xl">
+              <div className="text-5xl mb-6">👨‍🔧</div>
+              <h3 className="text-2xl font-bold mb-4">2. Find Local Experts</h3>
+              <p className="text-gray-400 text-lg">Connect with verified car care professionals in your area</p>
+            </div>
+            <div className="text-center p-8 bg-slate-800/40 backdrop-blur-xl rounded-2xl border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 shadow-xl">
+              <div className="text-5xl mb-6">✅</div>
+              <h3 className="text-2xl font-bold mb-4">3. Get Quality Service</h3>
+              <p className="text-gray-400 text-lg">Enjoy member discounts and priority booking with trusted providers</p>
+            </div>
+          </div>
+          
+          <div className="text-center">
+            <div className="bg-slate-800/60 backdrop-blur-xl rounded-2xl p-8 border border-slate-700/50 max-w-4xl mx-auto">
+              <h3 className="text-2xl font-bold mb-4">Ready to Connect with Car Smart People?</h3>
+              <p className="text-gray-300 text-lg mb-6">
+                Browse our network of verified automotive professionals and get the help your car needs.
+              </p>
+              <button 
+                onClick={() => openCarSmartPeople({ featured: 'true', member: 'exclusive' })}
+                className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+              >
+                Go to Car Smart People Directory
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Smart Garage Preview */}
       <section id="garage" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-slate-800/30">
         <div className="max-w-7xl mx-auto">
@@ -145,9 +246,19 @@ function App() {
                   </span>
                 </div>
                 <p className="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-lg">Mileage: {car.mileage}</p>
-                <button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-2 sm:py-3 rounded-xl font-semibold text-sm sm:text-base transition-all duration-300 shadow-lg">
-                  Manage Vehicle
-                </button>
+                <div className="space-y-2">
+                  <button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-2 sm:py-3 rounded-xl font-semibold text-sm sm:text-base transition-all duration-300 shadow-lg">
+                    Manage Vehicle
+                  </button>
+                  {car.status !== 'OK' && (
+                    <button 
+                      onClick={() => openCarSmartPeople({ service: car.status === 'Attention' ? 'maintenance' : 'repair', urgency: 'high' })}
+                      className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 py-2 sm:py-3 rounded-xl font-semibold text-sm sm:text-base transition-all duration-300 shadow-lg"
+                    >
+                      Get Help for This Issue
+                    </button>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -184,6 +295,12 @@ function App() {
                 <p className="text-gray-400 text-lg">
                   OBD-II device integration coming soon for real-time monitoring
                 </p>
+                <button 
+                  onClick={() => openCarSmartPeople({ service: 'diagnostics', type: 'repair' })}
+                  className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 py-3 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg mt-4"
+                >
+                  Need Help? Connect with Local Repair Shops
+                </button>
               </div>
             </div>
 
@@ -229,7 +346,14 @@ function App() {
               <div key={index} className="bg-gradient-to-br from-slate-800/60 to-slate-700/60 backdrop-blur-xl rounded-2xl p-8 border border-slate-600/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 shadow-xl">
                 <div className="flex justify-between items-start mb-6">
                   <div>
-                    <h3 className="text-xl font-bold mb-3">{deal.title}</h3>
+                    <div className="flex items-center gap-2 mb-2">
+                      <h3 className="text-xl font-bold">{deal.title}</h3>
+                      {isMember && (
+                        <span className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black px-2 py-1 rounded-full text-xs font-bold">
+                          CLUB MEMBER EXCLUSIVE
+                        </span>
+                      )}
+                    </div>
                     <p className="text-cyan-400 font-semibold text-lg">{deal.provider}</p>
                   </div>
                   <div className="text-right">
@@ -237,9 +361,17 @@ function App() {
                     <p className="text-green-400 font-bold text-2xl">{deal.discount}</p>
                   </div>
                 </div>
-                <button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-3 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg">
-                  Claim Deal
-                </button>
+                <div className="space-y-2">
+                  <button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-3 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg">
+                    Claim Deal
+                  </button>
+                  <button 
+                    onClick={() => openCarSmartPeople({ deal: deal.title, provider: deal.provider, type: 'deal' })}
+                    className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 py-2 rounded-xl font-semibold text-sm transition-all duration-300 shadow-lg"
+                  >
+                    See Local Shops Offering This Deal
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -297,8 +429,15 @@ function App() {
                   <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mr-6">
                     <span className="text-white font-bold text-xl">{provider.name[0]}</span>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold">{provider.name}</h3>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="text-xl font-bold">{provider.name}</h3>
+                      {isMember && (
+                        <span className="bg-gradient-to-r from-orange-400 to-red-400 text-white px-2 py-1 rounded-full text-xs font-bold">
+                          CLUB MEMBER DISCOUNT
+                        </span>
+                      )}
+                    </div>
                     <div className="flex items-center">
                       <span className="text-yellow-400 text-lg">★</span>
                       <span className="ml-2 text-lg font-semibold">{provider.rating}</span>
@@ -307,9 +446,17 @@ function App() {
                 </div>
                 <p className="text-gray-400 mb-3 text-lg">{provider.services}</p>
                 <p className="text-gray-500 mb-6 text-lg">{provider.location}</p>
-                <button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-3 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg">
-                  Book Now
-                </button>
+                <div className="space-y-2">
+                  <button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-3 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg">
+                    Book Now
+                  </button>
+                  <button 
+                    onClick={() => openCarSmartPeople({ provider: provider.name, service: provider.services, location: provider.location })}
+                    className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 py-2 rounded-xl font-semibold text-sm transition-all duration-300 shadow-lg"
+                  >
+                    View on Car Smart People
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -478,6 +625,64 @@ function App() {
         </div>
       </section>
 
+      {/* Blog Section */}
+      <section id="blog" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-slate-800/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12 sm:mb-20">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">Car Care Tips & Insights</h2>
+            <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">Expert advice to keep your vehicle running smoothly</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "How to Fix Your Brakes: A Complete Guide",
+                excerpt: "Learn the warning signs of brake problems and when to seek professional help.",
+                category: "Brakes",
+                cta: "Find a local brake shop near you"
+              },
+              {
+                title: "Engine Maintenance: Keep Your Car Running Smooth",
+                excerpt: "Essential engine care tips to prevent costly repairs and extend your vehicle's life.",
+                category: "Engine",
+                cta: "Connect with engine specialists"
+              },
+              {
+                title: "Tire Care 101: Safety and Performance Tips",
+                excerpt: "Everything you need to know about tire maintenance, rotation, and replacement.",
+                category: "Tires",
+                cta: "Find tire service providers"
+              }
+            ].map((article, index) => (
+              <div key={index} className="bg-slate-800/60 backdrop-blur-xl rounded-2xl p-8 border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 shadow-xl">
+                <div className="mb-4">
+                  <span className="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-sm font-semibold">
+                    {article.category}
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold mb-4">{article.title}</h3>
+                <p className="text-gray-400 mb-6 leading-relaxed">{article.excerpt}</p>
+                <button 
+                  onClick={() => openCarSmartPeople({ service: article.category.toLowerCase(), type: 'specialist' })}
+                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-3 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg"
+                >
+                  {article.cta}
+                </button>
+              </div>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <button 
+              onClick={() => openCarSmartPeople({ service: 'all', view: 'directory' })}
+              className="bg-slate-700 hover:bg-slate-600 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg"
+            >
+              Browse All Service Providers
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="bg-slate-900/50 backdrop-blur-md py-16 px-4 sm:px-6 lg:px-8 border-t border-slate-700/50">
         <div className="max-w-7xl mx-auto">
@@ -511,6 +716,14 @@ function App() {
                   </li>
                 ))}
               </ul>
+              <div className="mt-4">
+                <button 
+                  onClick={() => openCarSmartPeople({ view: 'directory', source: 'footer' })}
+                  className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-300 shadow-lg"
+                >
+                  Browse Car Smart People Directory
+                </button>
+              </div>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Newsletter</h4>
@@ -564,7 +777,7 @@ function App() {
             <p className="text-xs text-gray-400 mb-2">Quick Actions:</p>
             {[
               { text: '🔧 Run Diagnostics', action: 'diagnostics' },
-              { text: '👨‍🔧 Find Provider', action: 'providers' },
+              { text: '👨‍🔧 Find Provider', action: 'providers', external: true },
               { text: '📊 Get Evaluation', action: 'evaluations' },
               { text: '💡 View Smart Deals', action: 'deals' },
               { text: '🚗 Manage Garage', action: 'garage' }
@@ -572,7 +785,11 @@ function App() {
               <button 
                 key={option.action}
                 onClick={() => {
-                  scrollToSection(option.action);
+                  if (option.external) {
+                    openCarSmartPeople({ source: 'smartie_chatbot', action: option.action });
+                  } else {
+                    scrollToSection(option.action);
+                  }
                   setShowSmartie(false);
                 }}
                 className="w-full text-left bg-slate-700/60 hover:bg-cyan-500/20 border border-slate-600 hover:border-cyan-500 px-3 py-2 rounded-lg text-sm transition-all duration-300 hover:shadow-md"
