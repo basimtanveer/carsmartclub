@@ -214,7 +214,7 @@ function App() {
                 onClick={() => openCarSmartPeople({ featured: 'true', member: 'exclusive' })}
                 className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
               >
-                Go to Car Smart People Directory
+                Find Local Providers
               </button>
             </div>
           </div>
@@ -545,6 +545,64 @@ function App() {
         </div>
       </section>
 
+      {/* Blog Section */}
+      <section id="blog" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-slate-800/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12 sm:mb-20">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">Car Care Tips & Insights</h2>
+            <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">Expert advice to keep your vehicle running smoothly</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "How to Fix Your Brakes: A Complete Guide",
+                excerpt: "Learn the warning signs of brake problems and when to seek professional help.",
+                category: "Brakes",
+                cta: "Find a local brake shop near you"
+              },
+              {
+                title: "Engine Maintenance: Keep Your Car Running Smooth",
+                excerpt: "Essential engine care tips to prevent costly repairs and extend your vehicle's life.",
+                category: "Engine",
+                cta: "Connect with engine specialists"
+              },
+              {
+                title: "Tire Care 101: Safety and Performance Tips",
+                excerpt: "Everything you need to know about tire maintenance, rotation, and replacement.",
+                category: "Tires",
+                cta: "Find tire service providers"
+              }
+            ].map((article, index) => (
+              <div key={index} className="bg-slate-800/60 backdrop-blur-xl rounded-2xl p-8 border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 shadow-xl">
+                <div className="mb-4">
+                  <span className="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-sm font-semibold">
+                    {article.category}
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold mb-4">{article.title}</h3>
+                <p className="text-gray-400 mb-6 leading-relaxed">{article.excerpt}</p>
+                <button 
+                  onClick={() => openCarSmartPeople({ service: article.category.toLowerCase(), type: 'specialist' })}
+                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-3 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg"
+                >
+                  {article.cta}
+                </button>
+              </div>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <button 
+              onClick={() => openCarSmartPeople({ service: 'all', view: 'directory' })}
+              className="bg-slate-700 hover:bg-slate-600 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg"
+            >
+              Browse All Service Providers
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* Professional Signup Section */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-800/40 to-slate-700/40">
         <div className="max-w-4xl mx-auto text-center">
@@ -621,64 +679,6 @@ function App() {
             <p className="text-sm text-gray-500 mt-4">
               Join our network • Get verified • Start receiving leads
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Blog Section */}
-      <section id="blog" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-slate-800/30">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 sm:mb-20">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">Car Care Tips & Insights</h2>
-            <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">Expert advice to keep your vehicle running smoothly</p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "How to Fix Your Brakes: A Complete Guide",
-                excerpt: "Learn the warning signs of brake problems and when to seek professional help.",
-                category: "Brakes",
-                cta: "Find a local brake shop near you"
-              },
-              {
-                title: "Engine Maintenance: Keep Your Car Running Smooth",
-                excerpt: "Essential engine care tips to prevent costly repairs and extend your vehicle's life.",
-                category: "Engine",
-                cta: "Connect with engine specialists"
-              },
-              {
-                title: "Tire Care 101: Safety and Performance Tips",
-                excerpt: "Everything you need to know about tire maintenance, rotation, and replacement.",
-                category: "Tires",
-                cta: "Find tire service providers"
-              }
-            ].map((article, index) => (
-              <div key={index} className="bg-slate-800/60 backdrop-blur-xl rounded-2xl p-8 border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 shadow-xl">
-                <div className="mb-4">
-                  <span className="bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full text-sm font-semibold">
-                    {article.category}
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold mb-4">{article.title}</h3>
-                <p className="text-gray-400 mb-6 leading-relaxed">{article.excerpt}</p>
-                <button 
-                  onClick={() => openCarSmartPeople({ service: article.category.toLowerCase(), type: 'specialist' })}
-                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-3 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg"
-                >
-                  {article.cta}
-                </button>
-              </div>
-            ))}
-          </div>
-          
-          <div className="text-center mt-12">
-            <button 
-              onClick={() => openCarSmartPeople({ service: 'all', view: 'directory' })}
-              className="bg-slate-700 hover:bg-slate-600 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg"
-            >
-              Browse All Service Providers
-            </button>
           </div>
         </div>
       </section>
