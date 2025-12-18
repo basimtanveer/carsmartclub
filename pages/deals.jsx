@@ -98,7 +98,7 @@ export default function Deals({ user, login, logout }) {
                   {deal.isMemberExclusive && (
                     <div className="mb-3">
                       <span className="bg-slate-700 text-white px-2 py-1 rounded-full text-[10px] sm:text-xs font-semibold whitespace-nowrap inline-block">
-                        CLUB MEMBER EXCLUSIVE
+                        CLUB MEMBER DISCOUNT
                       </span>
                     </div>
                   )}

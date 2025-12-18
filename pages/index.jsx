@@ -325,7 +325,7 @@ export default function Home({ user, login, logout }) {
             <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
               <div className="space-y-3 sm:space-y-4 md:space-y-6 text-center lg:text-left">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
-                  A <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
+                  Your <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
                     Prescription
                   </span> for Better Car Care
                 </h1>
@@ -656,6 +656,14 @@ export default function Home({ user, login, logout }) {
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">Exclusive offers from verified providers in your area</p>
             </div>
             <DealsPreviewSection user={user} openCarSmartPeople={openCarSmartPeople} />
+            <div className="text-center mt-8 sm:mt-12">
+              <Link 
+                href="/deals"
+                className="inline-block bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base md:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+              >
+                View More Deals
+              </Link>
+            </div>
           </div>
         </section>
 
