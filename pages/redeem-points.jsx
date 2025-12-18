@@ -97,7 +97,7 @@ export default function RedeemPoints({ user, login, logout }) {
           <div className="mb-8">
             <h1 className="text-4xl font-bold mb-4">Turn Your Car Smart Points into Real Car Care</h1>
             <p className="text-gray-300 text-lg">
-              Your points are more than just numbers — they're your pass to easier, smarter, and more affordable car maintenance.
+              Your points are more than just numbers — they&apos;re your pass to easier, smarter, and more affordable car maintenance.
             </p>
           </div>
 
@@ -215,7 +215,7 @@ export default function RedeemPoints({ user, login, logout }) {
                 <div className="bg-cyan-500 rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">4</div>
                 <div>
                   <h3 className="font-semibold mb-1">Enjoy the Savings</h3>
-                  <p className="text-gray-300 text-sm">Your points save you money — it's that simple.</p>
+                  <p className="text-gray-300 text-sm">Your points save you money — it&apos;s that simple.</p>
                 </div>
               </div>
             </div>

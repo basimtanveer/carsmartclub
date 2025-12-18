@@ -330,7 +330,7 @@ export default function Home({ user, login, logout }) {
                   </span> for Better Car Care
                 </h1>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                  Manage your car's health, find trusted providers, and earn rewards every time you book care or make a purchase.
+                  Manage your car&apos;s health, find trusted providers, and earn rewards every time you book care or make a purchase.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 pt-2 sm:pt-4 justify-center lg:justify-start">
                   <Link href="/diagnostics" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 rounded-full font-semibold text-xs sm:text-sm md:text-base transition-all duration-300 transform hover:scale-105 hover:shadow-xl text-center">
@@ -395,7 +395,7 @@ export default function Home({ user, login, logout }) {
                       )}
                     </div>
                     <p className="text-xs sm:text-sm text-gray-400 mt-4">
-                      Track all your cars in one simple dashboard. Know when to service, how much it's worth, and where to go next.
+                      Track all your cars in one simple dashboard. Know when to service, how much it&apos;s worth, and where to go next.
                     </p>
                     {!user && (
                       <Link href="/join" className="block w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 py-2 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm md:text-base transition-all duration-300 shadow-lg text-center mt-4">
@@ -816,7 +816,7 @@ export default function Home({ user, login, logout }) {
                     </div>
                   </div>
                   <blockquote className="text-gray-300 text-sm sm:text-base md:text-lg mb-4 sm:mb-6 leading-relaxed">
-                    "{testimonial.quote}"
+                    &quot;{testimonial.quote}&quot;
                   </blockquote>
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-0">
                     <div>
@@ -1011,11 +1011,11 @@ export default function Home({ user, login, logout }) {
             </div>
             <div className="grid sm:grid-cols-2 gap-6">
               <div className="bg-slate-800/60 backdrop-blur-xl rounded-2xl p-6 border border-slate-700/50">
-                <p className="text-gray-300 mb-4">"I saved $200 on brakes — my membership paid for itself."</p>
+                <p className="text-gray-300 mb-4">&quot;I saved $200 on brakes — my membership paid for itself.&quot;</p>
                 <p className="text-sm text-gray-400">— Sarah Johnson, Austin TX</p>
               </div>
               <div className="bg-slate-800/60 backdrop-blur-xl rounded-2xl p-6 border border-slate-700/50">
-                <p className="text-gray-300 mb-4">"Got a fair cash offer for my car in minutes. Love it."</p>
+                <p className="text-gray-300 mb-4">&quot;Got a fair cash offer for my car in minutes. Love it.&quot;</p>
                 <p className="text-sm text-gray-400">— Mike Chen, Seattle WA</p>
               </div>
             </div>
@@ -1153,7 +1153,7 @@ export default function Home({ user, login, logout }) {
             
             <div className="bg-slate-700/50 rounded-lg p-2 sm:p-3 mb-3 sm:mb-4">
               <p className="text-gray-300 text-xs sm:text-sm">
-                👋 Hi! What's going on with your car today? I'm here to help!
+                👋 Hi! What&apos;s going on with your car today? I&apos;m here to help!
               </p>
             </div>
             

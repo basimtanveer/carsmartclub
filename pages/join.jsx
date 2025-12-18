@@ -162,7 +162,7 @@ export default function Join({ user, login, logout }) {
                   
                   {referralCode && (
                     <div className="bg-green-500/20 border border-green-500/50 rounded-lg p-4 md:col-span-2">
-                      <p className="text-sm text-green-400">🎉 Referral code detected! You'll earn bonus points when you join.</p>
+                      <p className="text-sm text-green-400">🎉 Referral code detected! You&apos;ll earn bonus points when you join.</p>
                       <input
                         type="text"
                         value={referralCode}

@@ -107,7 +107,7 @@ export default function Plans({ user, login, logout }) {
         <main className="max-w-7xl mx-auto px-4 mt-8 sm:px-6 lg:px-8 py-12">
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4">Join Car Smart Club for Free</h1>
-            <p className="text-gray-300 text-lg">Choose the plan that's right for you</p>
+            <p className="text-gray-300 text-lg">Choose the plan that&apos;s right for you</p>
           </div>
 
           {loading ? (
