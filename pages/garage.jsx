@@ -211,7 +211,7 @@ export default function Garage({ user, login, logout }) {
                   {vehicle.vin && <p className="text-sm text-gray-400 mb-2">VIN: {vehicle.vin}</p>}
                   {vehicle.color && <p className="text-sm text-gray-400 mb-4">Color: {vehicle.color}</p>}
                   <div className="flex gap-2">
-                    <Link href={`/diagnostics?vehicle=${vehicle._id}`} className="flex-1 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-2 rounded-xl font-semibold text-center transition-all">
+                    <Link href={`/diagnostics?vehicle=${vehicle._id}`} className="flex-1 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 py-2 rounded-xl font-semibold text-center transition-all">
                       Run Diagnostics
                     </Link>
                     <button
@@ -231,4 +231,5 @@ export default function Garage({ user, login, logout }) {
     </>
   )
 }
+
 

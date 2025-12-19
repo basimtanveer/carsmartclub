@@ -60,3 +60,4 @@ npm run dev
 - ✅ Backend running on port 5001
 - ✅ Frontend should run on port 3000
 - ⚠️ Make sure `.env` has `NEXT_PUBLIC_API_BASE_URL=http://localhost:5001/api`
+

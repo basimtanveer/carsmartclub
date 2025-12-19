@@ -44,3 +44,4 @@ Then restart the backend server.
 4. Try registering a new user at `http://localhost:3000/join`
 
 The errors should now be resolved! 🎉
+

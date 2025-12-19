@@ -119,3 +119,4 @@ All APIs are available at `http://localhost:5000/api`
 ✅ Provider Directory
 ✅ Deal Listings
 ✅ Dynamic Data (All from APIs, no static content)
+

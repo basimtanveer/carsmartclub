@@ -38,3 +38,4 @@ const diagnosticSchema = new mongoose.Schema({
 
 module.exports = mongoose.model('Diagnostic', diagnosticSchema);
 
+

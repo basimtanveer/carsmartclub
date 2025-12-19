@@ -420,45 +420,6 @@ export default function Home({ user, login, logout }) {
                 Our Car Smart Evaluation helps you decide whether to Keep, Sell, or Trade — and gives you a smart summary in under 3 minutes.
               </p>
             </div>
-            
-            <div className="grid sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
-              <div className="bg-slate-800/60 backdrop-blur-xl rounded-xl sm:rounded-2xl p-6 md:p-8 border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 shadow-xl">
-                <div className="text-4xl mb-4">🧰</div>
-                <h3 className="text-xl font-bold mb-3">Keep My Car</h3>
-                <p className="text-gray-400 mb-4 text-sm">See maintenance costs, upgrade options, and upcoming service reminders.</p>
-                <Link href="/evaluation?purpose=Keep" className="block w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-2 rounded-xl font-semibold text-sm transition-all text-center">
-                  View Maintenance Plan
-                </Link>
-              </div>
-              <div className="bg-slate-800/60 backdrop-blur-xl rounded-xl sm:rounded-2xl p-6 md:p-8 border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 shadow-xl">
-                <div className="text-4xl mb-4">💰</div>
-                <h3 className="text-xl font-bold mb-3">Sell My Car</h3>
-                <p className="text-gray-400 mb-4 text-sm">Get instant offers from local dealers and verified buyers.</p>
-                <Link href="/evaluation?purpose=Sell" className="block w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-2 rounded-xl font-semibold text-sm transition-all text-center">
-                  Get Cash Offer
-                </Link>
-              </div>
-              <div className="bg-slate-800/60 backdrop-blur-xl rounded-xl sm:rounded-2xl p-6 md:p-8 border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 shadow-xl">
-                <div className="text-4xl mb-4">🔁</div>
-                <h3 className="text-xl font-bold mb-3">Trade My Car</h3>
-                <p className="text-gray-400 mb-4 text-sm">Compare trade-in values and dealer credits nearby.</p>
-                <Link href="/evaluation?purpose=Trade" className="block w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-2 rounded-xl font-semibold text-sm transition-all text-center">
-                  Find Trade Offers
-                </Link>
-              </div>
-            </div>
-
-            <div className="text-center bg-slate-800/60 backdrop-blur-xl rounded-xl sm:rounded-2xl p-6 md:p-8 border border-slate-700/50">
-              <p className="text-gray-300 mb-4">💡 Not ready to decide? Generate a quick Smart Summary Report to review later.</p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Link href="/evaluation" className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 px-6 py-3 rounded-xl font-semibold transition-all">
-                  📄 Get Instant Summary Report (PDF)
-                </Link>
-                <button className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 px-6 py-3 rounded-xl font-semibold transition-all">
-                  ✉️ Send Report to My Email
-                </button>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -468,41 +429,51 @@ export default function Home({ user, login, logout }) {
             <div className="text-center mb-8 sm:mb-12 md:mb-20">
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 md:mb-6">How It Works</h2>
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">
-                We partner with <span className="text-cyan-400 font-semibold">Car Smart People</span> — see trusted providers in your area
+                Car Smart Club connects drivers, their cars, and trusted auto providers in one smart ecosystem
               </p>
             </div>
             
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
+            <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
               <div className="text-center p-4 sm:p-6 md:p-8 bg-slate-800/40 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 shadow-xl">
-                <div className="text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">🔍</div>
-                <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4">1. Diagnose Your Car</h3>
-                <p className="text-gray-400 text-sm sm:text-base md:text-lg">Run diagnostics to identify any issues with your vehicle</p>
+                <div className="text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">1️⃣</div>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4">Add Your Car</h3>
+                <p className="text-gray-400 text-sm sm:text-base md:text-lg">via VIN or make/model</p>
               </div>
               <div className="text-center p-4 sm:p-6 md:p-8 bg-slate-800/40 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 shadow-xl">
-                <div className="text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">👨‍🔧</div>
-                <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4">2. Find Local Experts</h3>
-                <p className="text-gray-400 text-sm sm:text-base md:text-lg">Connect with verified car care professionals in your area</p>
+                <div className="text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">2️⃣</div>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4">Run Diagnostics or Evaluation</h3>
+                <p className="text-gray-400 text-sm sm:text-base md:text-lg">get instant insights</p>
               </div>
-              <div className="text-center p-4 sm:p-6 md:p-8 bg-slate-800/40 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 shadow-xl sm:col-span-2 md:col-span-1">
-                <div className="text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">✅</div>
-                <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4">3. Get Quality Service</h3>
-                <p className="text-gray-400 text-sm sm:text-base md:text-lg">Enjoy member discounts and priority booking with trusted providers</p>
+              <div className="text-center p-4 sm:p-6 md:p-8 bg-slate-800/40 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 shadow-xl">
+                <div className="text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">3️⃣</div>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4">Book with Providers</h3>
+                <p className="text-gray-400 text-sm sm:text-base md:text-lg">access verified shops & discounts</p>
+              </div>
+              <div className="text-center p-4 sm:p-6 md:p-8 bg-slate-800/40 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 shadow-xl">
+                <div className="text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">4️⃣</div>
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4">Earn & Redeem Points</h3>
+                <p className="text-gray-400 text-sm sm:text-base md:text-lg">for car care, upgrades, or cash credit</p>
+              </div>
+            </div>
+            
+            <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
+              <div className="bg-slate-800/60 backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-slate-700/50">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4">Members:</h3>
+                <p className="text-gray-300 text-sm sm:text-base md:text-lg">Enjoy automatic perks & points.</p>
+              </div>
+              <div className="bg-slate-800/60 backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-slate-700/50">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4">Providers:</h3>
+                <p className="text-gray-300 text-sm sm:text-base md:text-lg">Gain more clients via featured listings & Club promotions.</p>
               </div>
             </div>
             
             <div className="text-center">
-              <div className="bg-slate-800/60 backdrop-blur-xl rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-slate-700/50 max-w-4xl mx-auto">
-                <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4">Ready to Connect with Car Smart People?</h3>
-                <p className="text-gray-300 text-sm sm:text-base md:text-lg mb-4 sm:mb-6">
-                  Browse our network of verified automotive professionals and get the help your car needs.
-                </p>
-                <button 
-                  onClick={() => openCarSmartPeople({ featured: 'true', member: 'exclusive' })}
-                  className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-full font-semibold text-sm sm:text-base md:text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
-                >
-                  Find Local Providers
-                </button>
-              </div>
+              <Link 
+                href="/join"
+                className="inline-block bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base md:text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+              >
+                Join Now & Get 250 Bonus Points
+              </Link>
             </div>
           </div>
         </section>
@@ -530,7 +501,7 @@ export default function Home({ user, login, logout }) {
                     </div>
                     <p className="text-gray-400 mb-3 sm:mb-4 md:mb-6 text-xs sm:text-sm md:text-lg">Mileage: {vehicle.mileage?.toLocaleString() || 'N/A'}</p>
                     <div className="space-y-2">
-                      <Link href="/garage" className="block w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-2 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm md:text-base transition-all duration-300 shadow-lg text-center">
+                      <Link href="/garage" className="block w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 py-2 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm md:text-base transition-all duration-300 shadow-lg text-center">
                         Manage Vehicle
                       </Link>
                       {vehicle.status !== 'OK' && (
@@ -563,7 +534,7 @@ export default function Home({ user, login, logout }) {
                     </div>
                     <p className="text-gray-400 mb-3 sm:mb-4 md:mb-6 text-xs sm:text-sm md:text-lg">Mileage: {car.mileage}</p>
                     <div className="space-y-2">
-                      <Link href="/garage" className="block w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-2 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm md:text-base transition-all duration-300 shadow-lg text-center">
+                      <Link href="/garage" className="block w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 py-2 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm md:text-base transition-all duration-300 shadow-lg text-center">
                         Manage Vehicle
                       </Link>
                       {car.status !== 'OK' && (
@@ -644,49 +615,6 @@ export default function Home({ user, login, logout }) {
                   </p>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Smart Deals Section */}
-        <section id="offers" className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-slate-800/30">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12 sm:mb-16 md:mb-20">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">💡 Smart Deals</h2>
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">Exclusive offers from verified providers in your area</p>
-            </div>
-            <DealsPreviewSection user={user} openCarSmartPeople={openCarSmartPeople} />
-            <div className="text-center mt-8 sm:mt-12">
-              <Link 
-                href="/deals"
-                className="inline-block bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base md:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
-              >
-                View More Deals
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Why Join Car Smart Club */}
-        <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12 sm:mb-16 md:mb-20">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">Why Join Car Smart Club?</h2>
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">Exclusive benefits for members</p>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
-              {[
-                { icon: '✅', title: 'Verified Providers', desc: 'All providers are verified and rated' },
-                { icon: '📞', title: 'Phone & Online Booking', desc: 'Easy booking through multiple channels' },
-                { icon: '💲', title: 'Member Discounts', desc: 'Exclusive deals and savings' },
-                { icon: '🚗', title: 'Free Garage Dashboard', desc: 'Manage all your vehicles in one place' }
-              ].map((feature, index) => (
-                <div key={index} className="text-center p-4 sm:p-6 md:p-8 bg-slate-800/40 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 shadow-xl">
-                  <div className="text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">{feature.icon}</div>
-                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4">{feature.title}</h3>
-                  <p className="text-gray-400 text-sm sm:text-base md:text-lg">{feature.desc}</p>
-                </div>
-              ))}
             </div>
           </div>
         </section>
@@ -774,6 +702,49 @@ export default function Home({ user, login, logout }) {
                   </div>
                 ))
               )}
+            </div>
+          </div>
+        </section>
+
+        {/* Why Join Car Smart Club */}
+        <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-12 sm:mb-16 md:mb-20">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">Why Join Car Smart Club?</h2>
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">Exclusive benefits for members</p>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+              {[
+                { icon: '✅', title: 'Verified Providers', desc: 'All providers are verified and rated' },
+                { icon: '📞', title: 'Phone & Online Booking', desc: 'Easy booking through multiple channels' },
+                { icon: '💲', title: 'Member Discounts', desc: 'Exclusive deals and savings' },
+                { icon: '🚗', title: 'Free Garage Dashboard', desc: 'Manage all your vehicles in one place' }
+              ].map((feature, index) => (
+                <div key={index} className="text-center p-4 sm:p-6 md:p-8 bg-slate-800/40 backdrop-blur-xl rounded-xl sm:rounded-2xl border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 shadow-xl">
+                  <div className="text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">{feature.icon}</div>
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4">{feature.title}</h3>
+                  <p className="text-gray-400 text-sm sm:text-base md:text-lg">{feature.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Smart Deals Section */}
+        <section id="offers" className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-slate-800/30">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-12 sm:mb-16 md:mb-20">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">💡 Smart Deals</h2>
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">Exclusive offers from verified providers in your area</p>
+            </div>
+            <DealsPreviewSection user={user} openCarSmartPeople={openCarSmartPeople} />
+            <div className="text-center mt-8 sm:mt-12">
+              <Link 
+                href="/deals"
+                className="inline-block bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base md:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+              >
+                View More Deals
+              </Link>
             </div>
           </div>
         </section>
@@ -1220,4 +1191,5 @@ export default function Home({ user, login, logout }) {
     </>
   )
 }
+
 
