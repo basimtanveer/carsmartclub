@@ -26,10 +26,10 @@ export default function RedeemPoints({ user, login, logout }) {
     try {
       const token = localStorage.getItem('token')
       const [balanceRes, rewardsRes] = await Promise.all([
-        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/points/balance`, {
+        fetch(`${API_BASE_URL}/points/balance`, {
           headers: { 'Authorization': `Bearer ${token}` },
         }),
-        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/rewards${category ? `?category=${category}` : ''}`, {
+        fetch(`${API_BASE_URL}/rewards${category ? `?category=${category}` : ''}`, {
           headers: { 'Authorization': `Bearer ${token}` },
         }),
       ])
@@ -58,7 +58,7 @@ export default function RedeemPoints({ user, login, logout }) {
     setRedeeming(rewardId)
     try {
       const token = localStorage.getItem('token')
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/rewards/${rewardId}/redeem`, {
+      const res = await fetch(`${API_BASE_URL}/rewards/${rewardId}/redeem`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

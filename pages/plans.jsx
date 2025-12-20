@@ -18,7 +18,7 @@ export default function Plans({ user, login, logout }) {
 
   const fetchPlans = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/plans`)
+      const res = await fetch(`${API_BASE_URL}/plans`)
       if (res.ok) {
         const data = await res.json()
         setPlans(data)
@@ -39,7 +39,7 @@ export default function Plans({ user, login, logout }) {
     setUpgrading(planName)
     try {
       const token = localStorage.getItem('token')
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/plans/upgrade`, {
+      const res = await fetch(`${API_BASE_URL}/plans/upgrade`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

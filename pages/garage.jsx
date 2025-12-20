@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Head from 'next/head'
+import { API_BASE_URL } from '../lib/api'
 import Loader from '../components/Loader'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -33,7 +34,7 @@ export default function Garage({ user, login, logout }) {
   const fetchVehicles = async () => {
     try {
       const token = localStorage.getItem('token')
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/vehicles`, {
+      const res = await fetch(`${API_BASE_URL}/vehicles`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -51,7 +52,7 @@ export default function Garage({ user, login, logout }) {
     e.preventDefault()
     try {
       const token = localStorage.getItem('token')
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/vehicles`, {
+      const res = await fetch(`${API_BASE_URL}/vehicles`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -82,7 +83,7 @@ export default function Garage({ user, login, logout }) {
     if (!confirm('Are you sure you want to delete this vehicle?')) return
     try {
       const token = localStorage.getItem('token')
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/vehicles/${id}`, {
+      const res = await fetch(`${API_BASE_URL}/vehicles/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -211,7 +212,14 @@ export default function Garage({ user, login, logout }) {
                   {vehicle.vin && <p className="text-sm text-gray-400 mb-2">VIN: {vehicle.vin}</p>}
                   {vehicle.color && <p className="text-sm text-gray-400 mb-4">Color: {vehicle.color}</p>}
                   <div className="flex gap-2">
-                    <Link href={`/diagnostics?vehicle=${vehicle._id}`} className="flex-1 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 py-2 rounded-xl font-semibold text-center transition-all">
+                    <Link 
+                      href={`/diagnostics?vehicle=${vehicle._id}`} 
+                      className={`flex-1 py-2 rounded-xl font-semibold text-center transition-all ${
+                        vehicle.status === 'Attention' || vehicle.status === 'Critical'
+                          ? 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700'
+                          : 'bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600'
+                      }`}
+                    >
                       Run Diagnostics
                     </Link>
                     <button

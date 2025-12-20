@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Head from 'next/head'
+import { API_BASE_URL } from '../lib/api'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
@@ -21,7 +22,7 @@ export default function Account({ user, login, logout }) {
   const fetchMemberStatus = async () => {
     try {
       const token = localStorage.getItem('token')
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/members/status`, {
+      const res = await fetch(`${API_BASE_URL}/members/status`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -37,7 +38,7 @@ export default function Account({ user, login, logout }) {
     setLoading(true)
     try {
       const token = localStorage.getItem('token')
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/members/join`, {
+      const res = await fetch(`${API_BASE_URL}/members/join`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

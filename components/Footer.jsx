@@ -132,28 +132,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="border-t border-slate-700/50 mt-6 sm:mt-8 pt-6 sm:pt-8">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 mb-6">
-            <div>
-              <h4 className="font-semibold mb-3 text-sm sm:text-base text-white">Legal</h4>
-              <ul className="space-y-1 sm:space-y-2 text-gray-400">
-                <li>
-                  <Link href="/legal" className="hover:text-cyan-400 transition-colors text-xs sm:text-sm">
-                    Legal & Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/provider-guide" className="hover:text-cyan-400 transition-colors text-xs sm:text-sm">
-                    Provider Guide
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/provider-agreement" className="hover:text-cyan-400 transition-colors text-xs sm:text-sm">
-                    Provider Agreement
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
+         
           <div className="text-center text-gray-400">
             <p className="text-xs sm:text-sm">© {new Date().getFullYear()} Car Smart Club. Owned by Vika Enterprises. Powered by Car Smart People.</p>
           </div>

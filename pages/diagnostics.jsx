@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Head from 'next/head'
+import { API_BASE_URL } from '../lib/api'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
@@ -26,7 +27,7 @@ export default function Diagnostics({ user, login, logout }) {
   const fetchVehicles = async () => {
     try {
       const token = localStorage.getItem('token')
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/vehicles`, {
+      const res = await fetch(`${API_BASE_URL}/vehicles`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -41,7 +42,7 @@ export default function Diagnostics({ user, login, logout }) {
   const fetchDiagnostics = async () => {
     try {
       const token = localStorage.getItem('token')
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/diagnostics`, {
+      const res = await fetch(`${API_BASE_URL}/diagnostics`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -79,7 +80,7 @@ export default function Diagnostics({ user, login, logout }) {
         recommendations.push('Schedule brake pad replacement')
       }
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/diagnostics`, {
+      const res = await fetch(`${API_BASE_URL}/diagnostics`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -29,16 +29,31 @@ export default function SignIn({ user, login, logout }) {
         body: JSON.stringify(formData),
       })
 
-      const data = await res.json()
+      if (!res.ok) {
+        try {
+          const data = await res.json()
+          setError(data.message || 'Invalid credentials. Please check your email and password.')
+        } catch (jsonError) {
+          setError('Invalid credentials. Please check your email and password.')
+        }
+        setLoading(false)
+        return
+      }
 
-      if (res.ok) {
+      const data = await res.json()
+      if (data.token) {
         login(data, data.token)
         router.push('/')
       } else {
-        setError(data.message || 'Invalid credentials')
+        setError('Login failed. Please try again.')
       }
     } catch (error) {
-      setError('An error occurred. Please try again.')
+      console.error('Login error:', error)
+      if (error.message?.includes('Failed to fetch') || error.message?.includes('ERR_CONNECTION_REFUSED')) {
+        setError('Unable to connect to the server. Please ensure the backend API server is running.')
+      } else {
+        setError('An error occurred. Please try again.')
+      }
     } finally {
       setLoading(false)
     }

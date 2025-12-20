@@ -26,7 +26,7 @@ export default function BookProvider({ user, login, logout }) {
 
   const fetchProvider = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/providers/${id}`)
+      const res = await fetch(`${API_BASE_URL}/providers/${id}`)
       const data = await res.json()
       setProvider(data)
     } catch (error) {

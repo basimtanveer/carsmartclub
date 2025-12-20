@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Head from 'next/head'
+import { API_BASE_URL } from '../lib/api'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
@@ -47,7 +48,7 @@ export default function Evaluation({ user, login, logout }) {
   const fetchVehicles = async () => {
     try {
       const token = localStorage.getItem('token')
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/vehicles`, {
+      const res = await fetch(`${API_BASE_URL}/vehicles`, {
         headers: { 'Authorization': `Bearer ${token}` },
       })
       if (res.ok) {
@@ -84,7 +85,7 @@ export default function Evaluation({ user, login, logout }) {
     setLoading(true)
     try {
       const token = localStorage.getItem('token')
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/evaluations`, {
+      const res = await fetch(`${API_BASE_URL}/evaluations`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -115,7 +116,7 @@ export default function Evaluation({ user, login, logout }) {
     setLoading(true)
     try {
       const token = localStorage.getItem('token')
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/evaluations/${evaluationId}/calculate`, {
+      const res = await fetch(`${API_BASE_URL}/evaluations/${evaluationId}/calculate`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -141,7 +142,7 @@ export default function Evaluation({ user, login, logout }) {
     setLoading(true)
     try {
       const token = localStorage.getItem('token')
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/evaluations/${evaluationId}/generate-report`, {
+      const res = await fetch(`${API_BASE_URL}/evaluations/${evaluationId}/generate-report`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

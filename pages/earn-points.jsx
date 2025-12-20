@@ -24,10 +24,10 @@ export default function EarnPoints({ user, login, logout }) {
     try {
       const token = localStorage.getItem('token')
       const [balanceRes, historyRes] = await Promise.all([
-        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/points/balance`, {
+        fetch(`${API_BASE_URL}/points/balance`, {
           headers: { 'Authorization': `Bearer ${token}` },
         }),
-        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/points?status=active`, {
+        fetch(`${API_BASE_URL}/points?status=active`, {
           headers: { 'Authorization': `Bearer ${token}` },
         }),
       ])

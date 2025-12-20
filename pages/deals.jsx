@@ -16,19 +16,32 @@ export default function Deals({ user, login, logout }) {
 
   const fetchDeals = async () => {
     try {
-      const url = new URL(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5000/api'}/deals`)
+      const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || '/api'
+      let url = `${apiBase}/deals`
+      const params = new URLSearchParams()
       if (category) {
-        url.searchParams.append('category', category)
+        params.append('category', category)
       }
       if (user?.isMember) {
-        url.searchParams.append('memberExclusive', 'true')
+        params.append('memberExclusive', 'true')
+      }
+      if (params.toString()) {
+        url += `?${params.toString()}`
       }
 
       const res = await fetch(url)
-      const data = await res.json()
-      setDeals(data)
+      if (res.ok) {
+        const data = await res.json()
+        setDeals(data)
+      } else {
+        throw new Error(`HTTP ${res.status}`)
+      }
     } catch (error) {
-      console.error('Error fetching deals:', error)
+      // Silently handle API errors
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('API unavailable for deals:', error.message)
+      }
+      setDeals([]) // Set empty array on error
     } finally {
       setLoading(false)
     }

@@ -134,8 +134,10 @@ export default function Home({ user, login, logout }) {
         setProviders(data.slice(0, 3))
       }
     } catch (error) {
-      console.error('Error fetching providers:', error)
-      // Will use default providers if API fails
+      // Silently handle API errors - will use default providers
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('API unavailable, using default providers:', error.message)
+      }
     }
   }
 
@@ -152,7 +154,10 @@ export default function Home({ user, login, logout }) {
         setVehicles(data.slice(0, 2)) // Show max 2 for preview
       }
     } catch (error) {
-      console.error('Error fetching vehicles:', error)
+      // Silently handle API errors
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('API unavailable for vehicles:', error.message)
+      }
     }
   }
 
@@ -414,7 +419,7 @@ export default function Home({ user, login, logout }) {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-8 sm:mb-12 md:mb-20">
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 md:mb-6">
-                🧠 Not Sure What to Do With Your Car?
+                Not Sure What to Do With Your Car?
               </h2>
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">
                 Our Car Smart Evaluation helps you decide whether to Keep, Sell, or Trade — and gives you a smart summary in under 3 minutes.
@@ -501,7 +506,7 @@ export default function Home({ user, login, logout }) {
                     </div>
                     <p className="text-gray-400 mb-3 sm:mb-4 md:mb-6 text-xs sm:text-sm md:text-lg">Mileage: {vehicle.mileage?.toLocaleString() || 'N/A'}</p>
                     <div className="space-y-2">
-                      <Link href="/garage" className="block w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 py-2 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm md:text-base transition-all duration-300 shadow-lg text-center">
+                      <Link href="/garage" className="block w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-2 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm md:text-base transition-all duration-300 shadow-lg text-center">
                         Manage Vehicle
                       </Link>
                       {vehicle.status !== 'OK' && (
@@ -534,7 +539,7 @@ export default function Home({ user, login, logout }) {
                     </div>
                     <p className="text-gray-400 mb-3 sm:mb-4 md:mb-6 text-xs sm:text-sm md:text-lg">Mileage: {car.mileage}</p>
                     <div className="space-y-2">
-                      <Link href="/garage" className="block w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 py-2 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm md:text-base transition-all duration-300 shadow-lg text-center">
+                      <Link href="/garage" className="block w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-2 sm:py-3 rounded-xl font-semibold text-xs sm:text-sm md:text-base transition-all duration-300 shadow-lg text-center">
                         Manage Vehicle
                       </Link>
                       {car.status !== 'OK' && (
@@ -734,7 +739,7 @@ export default function Home({ user, login, logout }) {
         <section id="offers" className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-slate-800/30">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12 sm:mb-16 md:mb-20">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">💡 Smart Deals</h2>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">Smart Deals</h2>
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">Exclusive offers from verified providers in your area</p>
             </div>
             <DealsPreviewSection user={user} openCarSmartPeople={openCarSmartPeople} />
@@ -1099,28 +1104,7 @@ export default function Home({ user, login, logout }) {
               </div>
             </div>
             <div className="border-t border-slate-700/50 mt-6 sm:mt-8 pt-6 sm:pt-8">
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 mb-6">
-                <div>
-                  <h4 className="font-semibold mb-3 text-sm sm:text-base text-white">Legal</h4>
-                  <ul className="space-y-1 sm:space-y-2 text-gray-400">
-                    <li>
-                      <Link href="/legal" className="hover:text-cyan-400 transition-colors text-xs sm:text-sm">
-                        Legal & Policy
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/provider-guide" className="hover:text-cyan-400 transition-colors text-xs sm:text-sm">
-                        Provider Guide
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/provider-agreement" className="hover:text-cyan-400 transition-colors text-xs sm:text-sm">
-                        Provider Agreement
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              
               <div className="text-center text-gray-400">
                 <p className="text-xs sm:text-sm">© {new Date().getFullYear()} Car Smart Club. Owned by Vika Enterprises. Powered by Car Smart People.</p>
               </div>

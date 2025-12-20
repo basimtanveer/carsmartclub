@@ -23,14 +23,24 @@ function MyApp({ Component, pageProps }) {
           if (res.ok) {
             return res.json()
           }
+          // If not authenticated, clear token
+          if (res.status === 401 || res.status === 403) {
+            localStorage.removeItem('token')
+            setUser(null)
+            return null
+          }
           throw new Error('Not authenticated')
         })
         .then(data => {
-          if (data._id) {
+          if (data && data._id) {
             setUser(data)
           }
         })
-        .catch(() => {
+        .catch((error) => {
+          // Silently handle API errors - user can still use the app
+          if (process.env.NODE_ENV === 'development') {
+            console.warn('Auth check failed (API may be unavailable):', error.message)
+          }
           localStorage.removeItem('token')
           setUser(null)
         })
