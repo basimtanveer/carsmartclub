@@ -13,9 +13,9 @@ dotenv.config()
 connectDB()
 
 const dev = process.env.NODE_ENV !== 'production'
-const hostname = 'localhost'
-// Always use port 3000 for the unified server (frontend + API)
-const port = 3000
+const hostname = '0.0.0.0' // Listen on all interfaces for production
+// Use port 3001 to avoid conflict with other website on port 3000
+const port = parseInt(process.env.PORT || '3001', 10)
 
 // Create Next.js app
 const app = next({ dev, hostname, port })
@@ -78,15 +78,16 @@ app.prepare().then(() => {
     return handle(req, res)
   })
 
-  // Start server
-  expressApp.listen(port, hostname, (err) => {
+  // Start server - listen on all interfaces (0.0.0.0) for production
+  expressApp.listen(port, '0.0.0.0', (err) => {
     if (err) {
       console.error('❌ Error starting server:', err)
       process.exit(1)
     }
-    console.log(`🚀 Ready on http://${hostname}:${port}`)
-    console.log(`📡 API available at http://${hostname}:${port}/api`)
-    console.log(`💚 Health check: http://${hostname}:${port}/api/health`)
+    console.log(`🚀 Ready on http://0.0.0.0:${port}`)
+    console.log(`📡 API available at http://0.0.0.0:${port}/api`)
+    console.log(`💚 Health check: http://0.0.0.0:${port}/api/health`)
+    console.log(`🌐 Accessible at http://localhost:${port} or http://127.0.0.1:${port}`)
   })
 }).catch((err) => {
   console.error('❌ Error preparing Next.js app:', err)

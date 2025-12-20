@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Head from 'next/head'
+import { API_BASE_URL } from '../../lib/api'
 import Loader from '../../components/Loader'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
@@ -66,30 +67,7 @@ export default function BookProvider({ user, login, logout }) {
       </Head>
 
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white">
-        {/* Header */}
-        <header className="bg-white backdrop-blur-sm shadow-xl">
-          <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
-              <Link href="/" className="flex items-center">
-                <img src={cscLogo.src} alt="Car Smart Club Logo" className="h-10 w-auto object-contain" />
-              </Link>
-              <div className="flex items-center space-x-4">
-                {user ? (
-                  <>
-                    <Link href="/account" className="text-gray-700 hover:text-blue-600">{user.name}</Link>
-                    <button onClick={logout} className="px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-red-500 to-pink-500 text-white">
-                      Logout
-                    </button>
-                  </>
-                ) : (
-                  <Link href="/signin" className="px-6 py-2 rounded-full font-semibold bg-gradient-to-r from-blue-500 to-cyan-500 text-white">
-                    Sign In
-                  </Link>
-                )}
-              </div>
-            </div>
-          </nav>
-        </header>
+        <Header user={user} logout={logout} />
 
         {/* Main Content */}
         <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

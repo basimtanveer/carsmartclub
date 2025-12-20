@@ -13,6 +13,11 @@ const nextConfig = {
       },
     ],
   },
+  // Suppress warnings about _document during build
+  onDemandEntries: {
+    maxInactiveAge: 25 * 1000,
+    pagesBufferLength: 2,
+  },
 }
 
 module.exports = nextConfig

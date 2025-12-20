@@ -3,7 +3,7 @@
 ## ✅ Final Status Check
 
 ### Server Configuration
-- ✅ **Custom Next.js Server** (`server.js`) - Unified server running on port 3000
+- ✅ **Custom Next.js Server** (`server.js`) - Unified server running on port 3001 (configurable)
 - ✅ **API Routes** - All Express routes properly mounted at `/api/*`
 - ✅ **MongoDB Connection** - Configured and working
 - ✅ **API Base URL** - Standardized to use `/api` (relative path) across all pages
@@ -184,7 +184,7 @@ All pages include:
 
 ## ✅ Verification Checklist
 
-- [x] Server runs on port 3000
+- [x] Server runs on port 3001 (configurable via PORT env variable)
 - [x] API endpoints accessible at `/api/*`
 - [x] All pages use `API_BASE_URL` consistently
 - [x] "Manage Vehicle" buttons are blue
@@ -204,9 +204,9 @@ All pages include:
 # Start the unified server (frontend + API)
 npm run dev
 
-# Server will run on http://localhost:3000
-# API available at http://localhost:3000/api
-# Health check: http://localhost:3000/api/health
+# Server will run on http://localhost:3001 (or port specified in PORT env variable)
+# API available at http://localhost:3001/api
+# Health check: http://localhost:3001/api/health
 ```
 
 ---
@@ -216,7 +216,7 @@ npm run dev
 1. **Environment Variables**: Make sure `.env` file has:
    - `MONGODB_URI` - MongoDB connection string
    - `JWT_SECRET` - Secret key for JWT tokens
-   - `PORT=3000` (optional, defaults to 3000)
+   - `PORT=3001` (optional, defaults to 3001)
 
 2. **API Base URL**: Leave `NEXT_PUBLIC_API_BASE_URL` empty in `.env` to use relative paths (`/api`)
 
