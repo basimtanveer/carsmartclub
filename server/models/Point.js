@@ -62,3 +62,4 @@ pointSchema.index({ user: 1, status: 1, expiresAt: 1 });
 module.exports = mongoose.model('Point', pointSchema);
 
 
+

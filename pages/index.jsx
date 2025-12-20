@@ -1011,36 +1011,39 @@ export default function Home({ user, login, logout }) {
                 <h4 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Quick Links</h4>
                 <ul className="space-y-1 sm:space-y-2 text-gray-400">
                   <li>
-                    <button 
-                      onClick={() => {
-                        if (router.pathname !== '/') {
-                          router.push('/#home').then(() => {
-                            setTimeout(() => scrollToSection('home'), 500)
-                          })
-                        } else {
-                          scrollToSection('home')
-                        }
-                      }} 
-                      className="hover:text-cyan-400 transition-colors text-sm sm:text-base text-left"
-                    >
-                      About
-                    </button>
+                    <Link href="/privacy-policy" className="hover:text-cyan-400 transition-colors text-sm sm:text-base">
+                      Privacy Policy
+                    </Link>
                   </li>
                   <li>
-                    <button 
-                      onClick={() => {
-                        if (router.pathname !== '/') {
-                          router.push('/#blog').then(() => {
-                            setTimeout(() => scrollToSection('blog'), 500)
-                          })
-                        } else {
-                          scrollToSection('blog')
-                        }
-                      }} 
-                      className="hover:text-cyan-400 transition-colors text-sm sm:text-base text-left"
-                    >
-                      Blog
-                    </button>
+                    <Link href="/gdpr" className="hover:text-cyan-400 transition-colors text-sm sm:text-base">
+                      GDPR
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/terms" className="hover:text-cyan-400 transition-colors text-sm sm:text-base">
+                      Terms and Conditions
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/refund-policy" className="hover:text-cyan-400 transition-colors text-sm sm:text-base">
+                      Refund Policy
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/cookie-policy" className="hover:text-cyan-400 transition-colors text-sm sm:text-base">
+                      Cookie Policy
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/provider-guide" className="hover:text-cyan-400 transition-colors text-sm sm:text-base">
+                      Provider Guide
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/provider-agreement" className="hover:text-cyan-400 transition-colors text-sm sm:text-base">
+                      Provider Agreement
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -1095,8 +1098,32 @@ export default function Home({ user, login, logout }) {
                 </div>
               </div>
             </div>
-            <div className="border-t border-slate-700/50 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center text-gray-400">
-              <p className="text-xs sm:text-sm">© {new Date().getFullYear()} Car Smart Club. Owned by Vika Enterprises. Powered by Car Smart People.</p>
+            <div className="border-t border-slate-700/50 mt-6 sm:mt-8 pt-6 sm:pt-8">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 mb-6">
+                <div>
+                  <h4 className="font-semibold mb-3 text-sm sm:text-base text-white">Legal</h4>
+                  <ul className="space-y-1 sm:space-y-2 text-gray-400">
+                    <li>
+                      <Link href="/legal" className="hover:text-cyan-400 transition-colors text-xs sm:text-sm">
+                        Legal & Policy
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/provider-guide" className="hover:text-cyan-400 transition-colors text-xs sm:text-sm">
+                        Provider Guide
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/provider-agreement" className="hover:text-cyan-400 transition-colors text-xs sm:text-sm">
+                        Provider Agreement
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="text-center text-gray-400">
+                <p className="text-xs sm:text-sm">© {new Date().getFullYear()} Car Smart Club. Owned by Vika Enterprises. Powered by Car Smart People.</p>
+              </div>
             </div>
           </div>
         </footer>
@@ -1191,5 +1218,6 @@ export default function Home({ user, login, logout }) {
     </>
   )
 }
+
 
 
