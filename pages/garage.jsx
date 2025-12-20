@@ -29,7 +29,7 @@ export default function Garage({ user, login, logout }) {
       return
     }
     fetchVehicles()
-  }, [user])
+  }, [user, router])
 
   const fetchVehicles = async () => {
     try {

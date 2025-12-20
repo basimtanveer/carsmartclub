@@ -17,7 +17,7 @@ export default function Account({ user, login, logout }) {
       return
     }
     fetchMemberStatus()
-  }, [user])
+  }, [user, router])
 
   const fetchMemberStatus = async () => {
     try {

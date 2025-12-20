@@ -22,6 +22,7 @@ export default function BookProvider({ user, login, logout }) {
     if (id) {
       fetchProvider()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   const fetchProvider = async () => {

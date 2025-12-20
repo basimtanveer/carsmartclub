@@ -18,7 +18,7 @@ export default function EarnPoints({ user, login, logout }) {
       return
     }
     fetchPointsData()
-  }, [user])
+  }, [user, router])
 
   const fetchPointsData = async () => {
     try {

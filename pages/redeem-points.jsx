@@ -20,7 +20,8 @@ export default function RedeemPoints({ user, login, logout }) {
       return
     }
     fetchData()
-  }, [user, category])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, category, router])
 
   const fetchData = async () => {
     try {

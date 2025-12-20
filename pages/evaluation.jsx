@@ -32,7 +32,7 @@ export default function Evaluation({ user, login, logout }) {
   useEffect(() => {
     if (urlPurpose) {
       setPurpose(urlPurpose)
-      setEvaluation({ ...evaluation, purpose: urlPurpose })
+      setEvaluation(prev => ({ ...prev, purpose: urlPurpose }))
     }
   }, [urlPurpose])
 
@@ -40,9 +40,10 @@ export default function Evaluation({ user, login, logout }) {
     if (user) {
       fetchVehicles()
       if (user.zipCode) {
-        setEvaluation({ ...evaluation, zipCode: user.zipCode })
+        setEvaluation(prev => ({ ...prev, zipCode: user.zipCode }))
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
   const fetchVehicles = async () => {

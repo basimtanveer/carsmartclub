@@ -22,7 +22,7 @@ export default function Diagnostics({ user, login, logout }) {
     }
     fetchVehicles()
     fetchDiagnostics()
-  }, [user])
+  }, [user, router])
 
   const fetchVehicles = async () => {
     try {
