@@ -153,10 +153,11 @@ export default function Garage({ user, login, logout }) {
                 />
                 <input
                   type="text"
-                  placeholder="VIN (optional)"
+                  placeholder="VIN"
                   value={formData.vin}
                   onChange={(e) => setFormData({ ...formData, vin: e.target.value })}
                   className="px-4 py-2 bg-slate-700/60 border border-slate-600 rounded-lg focus:border-cyan-500 focus:outline-none"
+                  required
                 />
                 <input
                   type="number"

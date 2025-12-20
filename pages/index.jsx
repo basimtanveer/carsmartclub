@@ -384,18 +384,7 @@ export default function Home({ user, login, logout }) {
                         ))
                       ) : (
                         <>
-                          <div className="bg-slate-700/60 rounded-lg p-2 sm:p-3 border border-slate-600/50">
-                            <div className="flex justify-between items-center">
-                              <span className="text-xs sm:text-sm font-medium">Honda Civic 2020</span>
-                              <span className="text-green-400 text-xs font-semibold">✅ Healthy</span>
-                            </div>
-                          </div>
-                          <div className="bg-slate-700/60 rounded-lg p-2 sm:p-3 border border-slate-600/50">
-                            <div className="flex justify-between items-center">
-                              <span className="text-xs sm:text-sm font-medium">Toyota Camry 2019</span>
-                              <span className="text-yellow-400 text-xs font-semibold">⚠️ Needs Service</span>
-                            </div>
-                          </div>
+                         
                         </>
                       )}
                     </div>
@@ -522,9 +511,7 @@ export default function Home({ user, login, logout }) {
                 ))
               ) : (
                 [
-                  { name: 'Honda Civic 2020', status: 'OK', mileage: '45,230', color: 'green' },
-                  { name: 'Toyota Camry 2019', status: 'Attention', mileage: '67,890', color: 'yellow' },
-                  { name: 'Ford Mustang 2021', status: 'Critical', mileage: '23,450', color: 'red' }
+                  
                 ].map((car, index) => (
                   <div key={index} className="bg-slate-800/60 backdrop-blur-xl rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 transform hover:scale-105 shadow-xl">
                     <div className="flex justify-between items-start mb-3 sm:mb-4 md:mb-6">

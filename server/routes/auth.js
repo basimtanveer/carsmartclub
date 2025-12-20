@@ -46,19 +46,32 @@ router.post('/register', async (req, res) => {
     // Generate referral code for new user
     const newReferralCode = await generateReferralCode();
 
-    // Create user
-    const user = await User.create({
+    // Prepare user data - only include fields that have values
+    const userData = {
       name,
       email,
       password,
-      phone,
-      zipCode,
-      ageRange,
-      preferences,
       referralCode: newReferralCode,
       availablePoints: 250, // Welcome bonus
       totalPoints: 250,
-    });
+    };
+
+    // Only add optional fields if they have values
+    if (phone && phone.trim()) {
+      userData.phone = phone.trim();
+    }
+    if (zipCode && zipCode.trim()) {
+      userData.zipCode = zipCode.trim();
+    }
+    if (ageRange && ageRange.trim()) {
+      userData.ageRange = ageRange.trim();
+    }
+    if (preferences && Array.isArray(preferences) && preferences.length > 0) {
+      userData.preferences = preferences;
+    }
+
+    // Create user
+    const user = await User.create(userData);
 
     // Award welcome bonus points
     await Point.create({
