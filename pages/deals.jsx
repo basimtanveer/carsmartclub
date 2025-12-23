@@ -12,7 +12,6 @@ export default function Deals({ user, login, logout }) {
 
   useEffect(() => {
     fetchDeals()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category])
 
   const fetchDeals = async () => {
