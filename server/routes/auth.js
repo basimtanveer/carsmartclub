@@ -4,6 +4,7 @@ const User = require('../models/User');
 const Point = require('../models/Point');
 const Referral = require('../models/Referral');
 const { protect } = require('../middleware/auth');
+const { checkDBConnection } = require('../middleware/db');
 
 const router = express.Router();
 
@@ -28,7 +29,7 @@ const generateReferralCode = async () => {
 // @route   POST /api/auth/register
 // @desc    Register a new user
 // @access  Public
-router.post('/register', async (req, res) => {
+router.post('/register', checkDBConnection, async (req, res) => {
   try {
     const { name, email, password, phone, zipCode, ageRange, preferences, referralCode } = req.body;
 
@@ -113,14 +114,30 @@ router.post('/register', async (req, res) => {
       res.status(400).json({ message: 'Invalid user data' });
     }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    // Handle MongoDB connection errors specifically
+    if (error.name === 'MongoServerError' || error.name === 'MongoNetworkError' || error.name === 'MongoTimeoutError') {
+      console.error('MongoDB error in register:', error.message);
+      return res.status(503).json({ 
+        message: 'Database connection error. Please try again later.',
+        error: 'Service temporarily unavailable'
+      });
+    }
+    
+    // Handle Mongoose validation errors
+    if (error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map(err => err.message);
+      return res.status(400).json({ message: messages.join(', ') });
+    }
+
+    console.error('Register error:', error.message);
+    res.status(500).json({ message: error.message || 'Internal server error' });
   }
 });
 
 // @route   POST /api/auth/login
 // @desc    Login user
 // @access  Public
-router.post('/login', async (req, res) => {
+router.post('/login', checkDBConnection, async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -152,7 +169,17 @@ router.post('/login', async (req, res) => {
       res.status(401).json({ message: 'Invalid credentials' });
     }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    // Handle MongoDB connection errors specifically
+    if (error.name === 'MongoServerError' || error.name === 'MongoNetworkError' || error.name === 'MongoTimeoutError') {
+      console.error('MongoDB error in login:', error.message);
+      return res.status(503).json({ 
+        message: 'Database connection error. Please try again later.',
+        error: 'Service temporarily unavailable'
+      });
+    }
+
+    console.error('Login error:', error.message);
+    res.status(500).json({ message: error.message || 'Internal server error' });
   }
 });
 
@@ -191,6 +218,9 @@ router.get('/me', protect, async (req, res) => {
 });
 
 module.exports = router;
+
+
+
 
 
 

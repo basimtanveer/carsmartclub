@@ -6,10 +6,22 @@ const connectDB = require('./config/database');
 // Load environment variables
 dotenv.config();
 
-// Connect to MongoDB
-connectDB();
-
 const app = express();
+
+// Initialize database connection
+(async () => {
+  try {
+    await connectDB();
+    console.log('✅ Database connection established');
+  } catch (error) {
+    console.error('❌ Failed to connect to database:', error.message);
+    // In production, exit if database connection fails
+    if (process.env.NODE_ENV === 'production') {
+      console.error('❌ Server will not start without database connection');
+      process.exit(1);
+    }
+  }
+})();
 
 // Middleware
 app.use(cors());
@@ -62,6 +74,9 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`📡 API available at http://localhost:${PORT}/api`);
   console.log(`💚 Health check: http://localhost:${PORT}/api/health`);
 });
+
+
+
 
 
 

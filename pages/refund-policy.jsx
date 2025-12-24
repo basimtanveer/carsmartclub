@@ -71,3 +71,5 @@ export default function RefundPolicy({ user, logout }) {
     </>
   )
 }
+
+

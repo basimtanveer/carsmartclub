@@ -86,3 +86,5 @@ export default function Terms({ user, logout }) {
     </>
   )
 }
+
+

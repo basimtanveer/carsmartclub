@@ -9,9 +9,6 @@ const connectDB = require('./server/config/database')
 // Load environment variables
 dotenv.config()
 
-// Connect to MongoDB
-connectDB()
-
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = '0.0.0.0' // Listen on all interfaces for production
 // Use port 3001 to avoid conflict with other website on port 3000
@@ -21,7 +18,19 @@ const port = parseInt(process.env.PORT || '3001', 10)
 const app = next({ dev, hostname, port })
 const handle = app.getRequestHandler()
 
-app.prepare().then(() => {
+app.prepare().then(async () => {
+  // Connect to MongoDB before starting server
+  try {
+    await connectDB()
+    console.log('✅ Database connection established')
+  } catch (error) {
+    console.error('❌ Failed to connect to database:', error.message)
+    // In production, you might want to retry or exit gracefully
+    if (process.env.NODE_ENV === 'production') {
+      console.error('❌ Server will not start without database connection')
+      process.exit(1)
+    }
+  }
   // Create Express server
   const expressApp = express()
 
@@ -93,3 +102,6 @@ app.prepare().then(() => {
   console.error('❌ Error preparing Next.js app:', err)
   process.exit(1)
 })
+
+
+

@@ -9,7 +9,7 @@ dotenv.config();
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/carsmartclub');
+    await mongoose.connect(process.env.MONGODB_URI);
     console.log('MongoDB Connected');
   } catch (error) {
     console.error('Error:', error.message);
@@ -272,6 +272,8 @@ const runSeed = async () => {
 };
 
 runSeed();
+
+
 
 
 
