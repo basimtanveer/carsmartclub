@@ -1,6 +1,8 @@
 const express = require('express');
 const User = require('../models/User');
 const { protect } = require('../middleware/auth');
+const { sendTransactionalEmail } = require('../services/emailService');
+const { getMembershipActivationTemplate } = require('../services/emailTemplates');
 
 const router = express.Router();
 
@@ -34,6 +36,14 @@ router.post('/join', protect, async (req, res) => {
     user.memberSince = new Date();
     await user.save();
 
+    // Send membership activation email (async, don't wait for it)
+    const membershipEmailHtml = getMembershipActivationTemplate(user.name, user.plan);
+    sendTransactionalEmail(
+      user.email,
+      'Your Car Smart Club Membership is Now Active! ✅',
+      membershipEmailHtml
+    ).catch(err => console.error('Failed to send membership activation email:', err));
+
     res.json({
       isMember: user.isMember,
       memberSince: user.memberSince,
@@ -45,6 +55,7 @@ router.post('/join', protect, async (req, res) => {
 });
 
 module.exports = router;
+
 
 
 

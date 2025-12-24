@@ -2,6 +2,8 @@ const express = require('express');
 const Plan = require('../models/Plan');
 const User = require('../models/User');
 const { protect } = require('../middleware/auth');
+const { sendSubscriptionEmail } = require('../services/emailService');
+const { getMembershipActivationTemplate } = require('../services/emailTemplates');
 
 const router = express.Router();
 
@@ -56,6 +58,14 @@ router.post('/upgrade', protect, async (req, res) => {
     user.plan = planName;
     await user.save();
 
+    // Send plan upgrade email (async, don't wait for it)
+    const upgradeEmailHtml = getMembershipActivationTemplate(user.name, planName);
+    sendSubscriptionEmail(
+      user.email,
+      `Successfully Upgraded to ${planName} Plan! 🎉`,
+      upgradeEmailHtml
+    ).catch(err => console.error('Failed to send plan upgrade email:', err));
+
     res.json({
       success: true,
       plan: planName,
@@ -67,6 +77,7 @@ router.post('/upgrade', protect, async (req, res) => {
 });
 
 module.exports = router;
+
 
 
 

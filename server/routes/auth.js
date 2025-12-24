@@ -5,6 +5,8 @@ const Point = require('../models/Point');
 const Referral = require('../models/Referral');
 const { protect } = require('../middleware/auth');
 const { checkDBConnection } = require('../middleware/db');
+const { sendTransactionalEmail } = require('../services/emailService');
+const { getWelcomeEmailTemplate } = require('../services/emailTemplates');
 
 const router = express.Router();
 
@@ -99,6 +101,18 @@ router.post('/register', checkDBConnection, async (req, res) => {
         await user.save();
       }
     }
+
+    // Send welcome email (async, don't wait for it)
+    const welcomeEmailHtml = getWelcomeEmailTemplate(user.name);
+    sendTransactionalEmail(
+      user.email,
+      'Welcome to Car Smart Club! 🎉',
+      welcomeEmailHtml
+    ).catch(err => console.error('Failed to send welcome email:', err));
+    
+    // Mark welcome email as sent
+    user.welcomeEmailSent = true;
+    await user.save({ validateBeforeSave: false });
 
     if (user) {
       res.status(201).json({

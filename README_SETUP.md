@@ -15,6 +15,14 @@ JWT_SECRET=your-secret-key-change-in-production
 PORT=5000
 NODE_ENV=development
 NEXT_PUBLIC_API_BASE_URL=http://localhost:5000/api
+
+# Email Configuration (SMTP) - Optional for development
+# See EMAIL_SETUP.md for detailed setup instructions
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your-email@gmail.com
+SMTP_PASS=your-app-password
 ```
 
 ### 3. Start MongoDB (if running locally)
@@ -119,6 +127,7 @@ All APIs are available at `http://localhost:5000/api`
 ✅ Provider Directory
 ✅ Deal Listings
 ✅ Dynamic Data (All from APIs, no static content)
+
 
 
 

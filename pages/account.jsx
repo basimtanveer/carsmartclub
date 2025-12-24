@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Head from 'next/head'
+import toast from 'react-hot-toast'
 import { API_BASE_URL } from '../lib/api'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -47,10 +48,18 @@ export default function Account({ user, login, logout }) {
       if (res.ok) {
         const data = await res.json()
         setMemberStatus(data)
-        alert('Successfully joined Car Smart Club!')
+        toast.success('Successfully joined Car Smart Club! 🎉 Enjoy exclusive member benefits!', {
+          duration: 5000,
+        })
+        // Refresh member status to show updated UI
+        await fetchMemberStatus()
+      } else {
+        const errorData = await res.json()
+        toast.error(errorData.message || 'Failed to join. Please try again.')
       }
     } catch (error) {
       console.error('Error joining:', error)
+      toast.error('An error occurred. Please try again later.')
     } finally {
       setLoading(false)
     }
