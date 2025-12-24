@@ -54,7 +54,8 @@ app.prepare().then(async () => {
         rewards: '/api/rewards',
         referrals: '/api/referrals',
         evaluations: '/api/evaluations',
-        plans: '/api/plans'
+        plans: '/api/plans',
+        bookings: '/api/bookings'
       }
     })
   })
@@ -77,6 +78,7 @@ app.prepare().then(async () => {
     expressApp.use('/api/referrals', require('./server/routes/referrals'))
     expressApp.use('/api/evaluations', require('./server/routes/evaluations'))
     expressApp.use('/api/plans', require('./server/routes/plans'))
+    expressApp.use('/api/bookings', require('./server/routes/bookings'))
     console.log('✅ All API routes loaded successfully')
   } catch (error) {
     console.error('❌ Error loading API routes:', error)

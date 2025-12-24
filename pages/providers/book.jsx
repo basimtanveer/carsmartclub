@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Head from 'next/head'
+import toast from 'react-hot-toast'
 import { API_BASE_URL } from '../../lib/api'
 import Loader from '../../components/Loader'
 import Header from '../../components/Header'
@@ -12,6 +13,7 @@ export default function BookProvider({ user, login, logout }) {
   const { id } = router.query
   const [provider, setProvider] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [submitting, setSubmitting] = useState(false)
   const [bookingData, setBookingData] = useState({
     date: '',
     time: '',
@@ -44,8 +46,47 @@ export default function BookProvider({ user, login, logout }) {
       router.push('/signin')
       return
     }
-    // Handle booking submission
-    alert('Booking request submitted! The provider will contact you soon.')
+
+    setSubmitting(true)
+    try {
+      const token = localStorage.getItem('token')
+      const res = await fetch(`${API_BASE_URL}/bookings`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          providerId: id,
+          service: bookingData.service,
+          date: bookingData.date,
+          time: bookingData.time,
+          notes: bookingData.notes,
+        }),
+      })
+
+      if (res.ok) {
+        const data = await res.json()
+        toast.success('Booking request submitted successfully! 🎉\nThe provider will contact you soon.')
+        // Reset form
+        setBookingData({
+          date: '',
+          time: '',
+          service: '',
+          notes: '',
+        })
+        // Optionally redirect to account or bookings page
+        // router.push('/account')
+      } else {
+        const error = await res.json()
+        toast.error(error.message || 'Failed to submit booking request. Please try again.')
+      }
+    } catch (error) {
+      console.error('Error submitting booking:', error)
+      toast.error('An error occurred. Please try again later.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   if (loading) {
@@ -168,9 +209,10 @@ export default function BookProvider({ user, login, logout }) {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-3 rounded-xl font-semibold transition-all"
+                  disabled={submitting}
+                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 py-3 rounded-xl font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Book Appointment
+                  {submitting ? 'Submitting...' : 'Book Appointment'}
                 </button>
               </form>
             </div>
@@ -181,6 +223,7 @@ export default function BookProvider({ user, login, logout }) {
     </>
   )
 }
+
 
 
 

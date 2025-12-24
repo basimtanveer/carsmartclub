@@ -40,6 +40,7 @@ app.use('/api/rewards', require('./routes/rewards'));
 app.use('/api/referrals', require('./routes/referrals'));
 app.use('/api/evaluations', require('./routes/evaluations'));
 app.use('/api/plans', require('./routes/plans'));
+app.use('/api/bookings', require('./routes/bookings'));
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -61,7 +62,8 @@ app.get('/', (req, res) => {
       rewards: '/api/rewards',
       referrals: '/api/referrals',
       evaluations: '/api/evaluations',
-      plans: '/api/plans'
+      plans: '/api/plans',
+      bookings: '/api/bookings'
     },
     frontend: 'http://localhost:3000'
   });

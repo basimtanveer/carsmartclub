@@ -313,6 +313,59 @@ const getBillingReceiptTemplate = (userName, amount, planName, transactionId, da
   return getEmailTemplate(content, 'Payment Receipt');
 };
 
+/**
+ * Provider booking notification email template
+ */
+const getProviderBookingTemplate = (providerName, customerName, customerEmail, customerPhone, service, date, time, notes, bookingId) => {
+  const formattedDate = new Date(date).toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  const content = `
+    <h2 style="color: #ffffff; margin-top: 0;">New Booking Request! 📅</h2>
+    
+    <p style="font-size: 16px; line-height: 1.6;">
+      Hi ${providerName},
+    </p>
+    
+    <p style="font-size: 16px; line-height: 1.6;">
+      You have received a new booking request from a Car Smart Club member!
+    </p>
+    
+    <div style="background-color: #0f172a; padding: 20px; border-radius: 8px; margin: 25px 0; border-left: 4px solid #3b82f6;">
+      <h3 style="color: #3b82f6; margin-top: 0;">Booking Details</h3>
+      <p style="margin: 8px 0; color: #e2e8f0;"><strong style="color: #ffffff;">Customer:</strong> ${customerName}</p>
+      <p style="margin: 8px 0; color: #e2e8f0;"><strong style="color: #ffffff;">Email:</strong> <a href="mailto:${customerEmail}" style="color: #60a5fa;">${customerEmail}</a></p>
+      ${customerPhone ? `<p style="margin: 8px 0; color: #e2e8f0;"><strong style="color: #ffffff;">Phone:</strong> <a href="tel:${customerPhone}" style="color: #60a5fa;">${customerPhone}</a></p>` : ''}
+      <p style="margin: 8px 0; color: #e2e8f0;"><strong style="color: #ffffff;">Service:</strong> ${service}</p>
+      <p style="margin: 8px 0; color: #e2e8f0;"><strong style="color: #ffffff;">Date:</strong> ${formattedDate}</p>
+      <p style="margin: 8px 0; color: #e2e8f0;"><strong style="color: #ffffff;">Time:</strong> ${time}</p>
+      <p style="margin: 8px 0; color: #e2e8f0;"><strong style="color: #ffffff;">Booking ID:</strong> ${bookingId}</p>
+      ${notes ? `<p style="margin: 8px 0; color: #e2e8f0;"><strong style="color: #ffffff;">Notes:</strong> ${notes}</p>` : ''}
+    </div>
+    
+    <div style="background-color: #0f172a; padding: 15px; border-radius: 8px; margin: 25px 0; border-left: 4px solid #f59e0b;">
+      <p style="margin: 0; color: #fbbf24; font-size: 14px;">
+        <strong>Action Required:</strong> Please contact the customer to confirm this booking. You can reply directly to this email or call them using the phone number provided above.
+      </p>
+    </div>
+    
+    <p style="font-size: 16px; line-height: 1.6;">
+      This is an automated notification from Car Smart Club. The customer is expecting to hear from you soon.
+    </p>
+    
+    <p style="font-size: 14px; color: #94a3b8; margin-top: 30px;">
+      Questions about this booking? Contact us at 
+      <a href="mailto:${EMAIL_ADDRESSES.SUPPORT}" style="color: #60a5fa;">${EMAIL_ADDRESSES.SUPPORT}</a>
+    </p>
+  `;
+  
+  return getEmailTemplate(content, 'New Booking Request');
+};
+
 module.exports = {
   getWelcomeEmailTemplate,
   getMembershipActivationTemplate,
@@ -321,5 +374,6 @@ module.exports = {
   getDiscountConfirmationTemplate,
   getDealRedemptionTemplate,
   getBillingReceiptTemplate,
+  getProviderBookingTemplate,
 };
 
